@@ -95,15 +95,6 @@ public class Main {
         System.out.print("Enter x1: ");
         double x1 = input.nextDouble();
         function.RegulaFalsiIteration(x0, x1, 1);
-//        System.out.println("Enter lower boundary of X");
-//        int LowerBoundary = input.nextInt();
-//        System.out.println("Enter higher boundary of X");
-//        int HigherBoundary = input.nextInt();
 
-//        DecimalFormat df = new DecimalFormat("#.####");
-
-//        String formattedRoot = df.format(root);
-
-//        System.out.println(formattedRoot);
     }
 }
