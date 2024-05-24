@@ -1,6 +1,6 @@
 public class Variables {
-    private double coefficient, degree, X;
-    int Typeofterm;
+    public double coefficient, degree, X;
+    public int Typeofterm;
 
     public Variables(double coefficient, double degree, double x, int typeofterm) {
         this.coefficient = coefficient;

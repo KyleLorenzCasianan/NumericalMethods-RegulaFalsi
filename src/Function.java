@@ -12,7 +12,12 @@ public class Function {
     public double SubstituteX(double coefficient, double degree, double x, int type){
         switch (type){
             case 1:
-                return coefficient * (Math.pow(x, degree));
+                if (degree == 0 ){
+                    return coefficient;
+                }
+                else{
+                    return coefficient * (Math.pow(x, degree));
+                }
             case 2:
                 return coefficient * Math.sin(Math.pow(x, degree));
             case 3:
@@ -114,7 +119,7 @@ public class Function {
         for(int i = 0; i <= range; i++){
 
             double fx = FindFx(temporaryvariable, lowerboundary);
-            System.out.print(df.format(fx) + "  ");
+            System.out.print("    "+df.format(fx) + "  ");
             lowerboundary++;
 
         }
@@ -136,8 +141,8 @@ public class Function {
         x2 = this.NewRegulaFalsiX(x0, fx0, x1, fx1);
         fx2 = this.FindFx(variables, x2);
 
+
         if( (fx0 < 0 && fx1 < 0) || (fx0 > 0 && fx1 > 0)){
-            System.out.println("The inputted values will not work");
             return 0;
         }
 

@@ -7,6 +7,9 @@ public class Main {
 
         double coefficient;
         double degree;
+        double result;
+        DecimalFormat df = new DecimalFormat("#.####");
+
 
         Function function = new Function();
         Scanner input = new Scanner(System.in);
@@ -18,13 +21,25 @@ public class Main {
         for(int i = 0; i <= NumberOfTerms; i++){
             if(i == NumberOfTerms){
                 for(int j = 0; j < NumberOfTerms; j++){
-                    System.out.print(function.terms[j] + " ");
+                    System.out.print(function.terms[j]);
+                    if(function.variables[j].getCoefficient() < 0){
+                        if( (j+1) == NumberOfTerms){
+                            break;
+                        }
+                        else{
+                            System.out.print(" + ");
+                        }
+                    }
+                    else{
+                        System.out.print(" ");
+                    }
                 }
                 System.out.println();
                 break;
             }
 
             System.out.println("Enter a number that you would like your term to be ( 1 - X; 2 - sin x; 3 - cos x; 4 - tan x; 5 - e^x; 6 - sqrt(x))");
+            System.out.print("Choice: ");
             int choice = input.nextInt();
 
             switch (choice){
@@ -90,11 +105,33 @@ public class Main {
         function.TableDisplay(lowrange, highrange);
 
         System.out.println();
+
         System.out.print("Enter x0: ");
         double x0 = input.nextDouble();
         System.out.print("Enter x1: ");
         double x1 = input.nextDouble();
-        function.RegulaFalsiIteration(x0, x1, 1);
+
+        if( ((function.FindFx(function.variables, x0) < 0 && function.FindFx(function.variables, x1) < 0) || (function.FindFx(function.variables, x0) > 0 && function.FindFx(function.variables, x1) > 0)) || (x0 + 1) != x1){
+            boolean checker = false;
+            while(!checker){
+                System.out.println("The inputted values will not work");
+                System.out.print("Enter x0: ");
+                x0 = input.nextDouble();
+                System.out.print("Enter x1: ");
+                x1 = input.nextDouble();
+
+                if( !((function.FindFx(function.variables, x0) < 0 && function.FindFx(function.variables, x1) < 0) || (function.FindFx(function.variables, x0) > 0 && function.FindFx(function.variables, x1) > 0)) ){
+                    if( (x0 + 1) == x1){
+                        checker = true;
+                    }
+                }
+            }
+
+        }
+
+
+        result = (function.RegulaFalsiIteration(x0,x1,1));
+        System.out.print("The estimated root is x2 = " + df.format(result));
 
     }
 }
